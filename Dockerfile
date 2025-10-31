@@ -39,12 +39,18 @@ RUN C:\msys64\usr\bin\bash.exe -lc 'export PATH=/mingw64/bin:$PATH && cd /c/buil
 
 RUN C:\msys64\usr\bin\bash.exe -lc 'cd /c/build/tinker/build && ls -la'
 
-
 # Build with ninja instead of make
 RUN C:\msys64\usr\bin\bash.exe -lc 'export PATH=/mingw64/bin:$PATH && cd /c/build/tinker/build && ninja'
 
-# Copy binaries to volume location
-RUN C:\msys64\usr\bin\bash.exe -lc 'mkdir -p /c/output && cd /c/build/tinker/build && mv *.exe /c/output'
 
-# Debug log to see the exe files
+# Add this to debug inside the container
+#RUN C:\msys64\usr\bin\bash.exe -lc 'export PATH=/mingw64/bin:$PATH && cd /c/build/tinker/build && ./alchemy.exe > ./alchemy-output.txt 2>&1 || true'
+#RUN C:\msys64\usr\bin\bash.exe -lc 'cat /c/build/tinker/build/alchemy-output.txt'
+
+# Copy binaries to volume location
+RUN C:\msys64\usr\bin\bash.exe -lc 'mkdir -p /c/output && cd /c/build/tinker/build && cp *.exe /c/output'
+
+# Copy all MinGW runtime DLLs
+RUN C:\msys64\usr\bin\bash.exe -lc 'cd /mingw64/bin && cp *.dll /c/output/'
+
 RUN C:\msys64\usr\bin\bash.exe -lc 'cd /c/output && ls -la'
