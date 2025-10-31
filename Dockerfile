@@ -18,6 +18,7 @@ RUN C:\msys64\usr\bin\bash.exe -lc 'pacman --noconfirm -Syuu'; `
 # Install MinGW-w64 toolchain and build tools
 RUN C:\msys64\usr\bin\bash.exe -lc 'pacman --noconfirm -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake make'
 RUN C:\msys64\usr\bin\bash.exe -lc 'pacman --noconfirm -S git mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-cmake make'
+RUN C:\msys64\usr\bin\bash.exe -lc 'pacman --noconfirm -S ninja'
 
 # Set working directory
 WORKDIR C:\build
@@ -38,7 +39,6 @@ RUN C:\msys64\usr\bin\bash.exe -lc 'export PATH=/mingw64/bin:$PATH && cd /c/buil
 
 RUN C:\msys64\usr\bin\bash.exe -lc 'cd /c/build/tinker/build && ls -la'
 
-RUN C:\msys64\usr\bin\bash.exe -lc 'pacman --noconfirm -S ninja'
 
 # Build with ninja instead of make
 RUN C:\msys64\usr\bin\bash.exe -lc 'export PATH=/mingw64/bin:$PATH && cd /c/build/tinker/build && ninja'
@@ -48,4 +48,3 @@ RUN C:\msys64\usr\bin\bash.exe -lc 'mkdir -p /c/output && cd /c/build/tinker/bui
 
 # Debug log to see the exe files
 RUN C:\msys64\usr\bin\bash.exe -lc 'cd /c/output && ls -la'
-
