@@ -1,3 +1,11 @@
+### Requirements
+
+- Windows 11
+- Docker Desktop installed and running 
+- Change Docker desktop setting to use Windows containers
+
+### Usage
+
 To get the EXE files you need to run these commads:
 
 ```docker build -t tinker:latest .```
